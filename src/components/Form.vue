@@ -1,5 +1,5 @@
 <template>
-  <form action="/upload" id="uploadForm" enctype="image/*" method="post">
+  <!-- <form action="/upload" id="uploadForm" enctype="image/*" method="post">
     <p>
       <label for="file" style="font-weight: bold">添加图片：</label>
       <input type="file" name="file" id="file" />
@@ -23,5 +23,11 @@
         <option value="6">amusement</option>
       </select>
     </p>
-  </form>
+  </form> -->
+  <div class="form">
+    <div class="upload-img"></div>
+    <div class="img-url"></div>
+    <div class="select-mode"></div>
+    <div class="select-emo"></div>
+  </div>
 </template>

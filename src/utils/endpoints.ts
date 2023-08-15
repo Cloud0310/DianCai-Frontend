@@ -3,8 +3,24 @@ const instance = axios.create({
   baseURL: "http://localhost:8000/",
   timeout: 1000,
 });
-interface imageData {
-  image: File;
-  mode: string;
+
+function uploadImg(imageData: { image: File; mode: Number }) {
+  instance
+    .post("/upload", imageData)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => console.error(err));
+  return;
 }
-function uploadImg(imageData: imageData) {}
+function uploadImgURL(imageData: { image: string; mode: Number }) {
+  instance
+    .post("/upload", imageData)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => console.error(err));
+  return;
+}
+
+export default { uploadImg, uploadImgURL };
