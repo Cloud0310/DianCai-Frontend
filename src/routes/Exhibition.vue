@@ -23,16 +23,18 @@
         <h1>点彩成乐：生成您的专属配乐</h1>
       </div> -->
       <!-- 创建 form 表单 -->
+      <Form />
 
+      <div style="text-align: center; width: 80% height: 10%;">
+        <button id="submitButton" type="button">提交</button>
+      </div>
 
-        <div style="text-align: center; width: 80%">
-          <button id="submitButton" type="button">提交</button>
-        </div>
-      
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+import Form from '../components/Form.vue';
+
 
 // import { ref } from 'vue'
 
