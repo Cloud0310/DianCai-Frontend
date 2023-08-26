@@ -24,11 +24,6 @@
       </div> -->
       <!-- 创建 form 表单 -->
       <Form />
-
-      <div style="text-align: center; width: 80% height: 10%;">
-        <button id="submitButton" type="button">提交</button>
-      </div>
-
     </div>
   </div>
 </template>
