@@ -1,29 +1,34 @@
 <template>
   <div class="form">
-    <div class="img-source">
-      <div>
-        <el-upload class="upload-img" drag v-model="fileList" :auto-upload=false accept="image" limit=1 action="#">
-          <el-icon class="el-icon--upload">
-            <upload-filled/>
-          </el-icon>
-          <div class="el-upload__text">将图片拖动到此处或<em>点击上传</em></div>
-        </el-upload>
-      </div>
-      <div class="img-url">
-        <el-input placeholder="请输入图片链接" v-model="imgUrl" clearable>
-          <template #prepend>https://</template>
-        </el-input>
-      </div>
+    <div class="upload-img">
+      <el-upload v-model="fileList" :auto-upload=false accept="image" action="#" drag limit=1>
+        <el-icon class="el-icon--upload">
+          <upload-filled/>
+        </el-icon>
+        <div class="el-upload__text">将图片拖动到此处或<em>点击上传</em></div>
+      </el-upload>
+    </div>
+    <div class="img-url">
+      <span style="width: 150px">或输入图片链接</span>
+      <el-input v-model="imgUrl" clearable placeholder="请输入图片链接">
+        <template #prepend>
+          <el-select v-model="selectedUrlType" placeholder="请选择" style="width: 90px">
+            <el-option v-for="i in urlTypes" :value="i"/>
+          </el-select>
+        </template>
+      </el-input>
     </div>
     <div class="options">
-      <div class="select-mode">
+      <div class="select">
+        <span class="tips">请选择模式</span>
         <el-select v-model="selectedMode" placeholder="请选择模式">
           <el-option v-for=" item  in  modes " :key="(item.value as number)" :label="(item.mode as string)"
                      :value="(item.value as number)">{{ item.mode }}
           </el-option>
         </el-select>
       </div>
-      <div class="select-emo">
+      <div class="select">
+        <span class="tips">请选择情感</span>
         <el-select v-model="selectedMotion" placeholder="请选择情感">
           <el-option v-for=" item  in  motions " :key="(item.value as number)" :label="(item.motion as string)"
                      :value="(item.value as number)">{{ item.motion }}
@@ -32,7 +37,7 @@
       </div>
     </div>
     <div class="submit">
-      <el-button type="primary"> 提交
+      <el-button type="primary" @click="handleClick"> 提交
         <el-icon>
           <Upload/>
         </el-icon>
@@ -41,16 +46,28 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import {UploadFilled, Upload} from '@element-plus/icons-vue';
+<script lang="ts" setup>
+import {Upload, UploadFilled} from '@element-plus/icons-vue';
 import {ElOption, UploadUserFile} from 'element-plus';
 import {ref} from 'vue';
+
+// const emits = defineEmits(['update:isSubmitted'])
+defineProps({
+  isSubmitted: Boolean
+})
+
+function handleClick() {
+  // emits('submit', {
+  // })
+}
 
 const fileList = ref<UploadUserFile[]>()
 const imgUrl = ref<String>("")
 const selectedMode = ref<Number>(0)
 const selectedMotion = ref<Number>(0)
+const selectedUrlType = ref<String>("https://")
 
+const urlTypes = ["http://", "https://"]
 const motions: Array<{
   value: number,
   motion: string
@@ -108,32 +125,56 @@ const modes: Array<{
 <style scoped>
 .form {
   width: 100%;
-  height: 90%;
+  height: 100%;
+  padding: 0 10%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .upload-img {
-  min-width: 800px;
-  height: 25%;
+  height: fit-content;
+  width: 100%;
+  padding: 10px;
 }
 
 .options {
   width: 100%;
-  height: 25%;
+  height: 30%;
+  padding: 10px;
+
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .img-url {
-  margin: 5px 0px;
+  height: 20%;
+  width: 100%;
+  padding: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.select {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .submit {
-
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
+.tips {
+  width: 100%;
+  text-align: start;
+}
 </style>
