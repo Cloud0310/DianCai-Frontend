@@ -1,7 +1,7 @@
 <template>
   <div class="form">
     <div class="upload-img">
-      <el-upload v-model="fileList" :auto-upload=false accept="image" action="#" drag limit=1>
+      <el-upload v-model="fileList" :auto-upload=false accept="image" action="#" drag :limit=1>
         <el-icon class="el-icon--upload">
           <upload-filled/>
         </el-icon>
@@ -30,8 +30,8 @@
       <div class="select">
         <span class="tips">请选择情感</span>
         <el-select v-model="selectedMotion" placeholder="请选择情感">
-          <el-option v-for=" item  in  motions " :key="(item.value as number)" :label="(item.motion as string)"
-                     :value="(item.value as number)">{{ item.motion }}
+          <el-option v-for=" i  in  motions " :key="(i.value as number)" :label="(i.motion as string)"
+                     :value="(i.value as number)">{{ i.motion }}
           </el-option>
         </el-select>
       </div>
@@ -50,15 +50,14 @@
 import {Upload, UploadFilled} from '@element-plus/icons-vue';
 import {ElOption, UploadUserFile} from 'element-plus';
 import {ref} from 'vue';
+// import {postFormData} from "../utils/endpoints.ts";
 
-// const emits = defineEmits(['update:isSubmitted'])
-defineProps({
-  isSubmitted: Boolean
-})
+const emit = defineEmits(['update:modelValue'])
+const props = defineProps(['modelValue'])
 
 function handleClick() {
-  // emits('submit', {
-  // })
+  emit('update:modelValue', true)
+  console.log(props.modelValue)
 }
 
 const fileList = ref<UploadUserFile[]>()
