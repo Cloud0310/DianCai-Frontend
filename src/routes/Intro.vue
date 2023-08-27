@@ -14,7 +14,7 @@
     </div>
     <div class="main">
       <!-- 第一部分 -->
-      <a name="VOCALOID_">
+      <a id="VOCALOID_">
         <h2>“点彩成乐” 简介</h2>
       </a>
       <p>
